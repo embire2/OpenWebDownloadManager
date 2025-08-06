@@ -32,12 +32,12 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked; OnlyBelowVersion: 6.1
-Name: "browserintegration"; Description: "Install browser extensions"; GroupDescription: "Browser Integration"; Flags: checked
-Name: "startmenu"; Description: "Add to Start Menu"; GroupDescription: "{cm:AdditionalIcons}"; Flags: checked
+Name: "browserintegration"; Description: "Install browser extensions"; GroupDescription: "Browser Integration"
+Name: "startmenu"; Description: "Add to Start Menu"; GroupDescription: "{cm:AdditionalIcons}"
 
 [Files]
 ; Main application files
-Source: "..\src\OpenWebDM\bin\Release\net8.0-windows\publish\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "..\src\OpenWebDM\bin\Release\net8.0-windows\win-x64\publish\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 
 ; Browser extensions
 Source: "..\browser-extensions\chrome\*"; DestDir: "{app}\Extensions\Chrome"; Flags: ignoreversion recursesubdirs createallsubdirs
