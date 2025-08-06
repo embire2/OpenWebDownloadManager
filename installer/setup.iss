@@ -14,7 +14,8 @@ OutputDir=.\Output
 OutputBaseFilename=OWDM1_0_0
 Compression=lzma
 SolidCompression=yes
-SetupIconFile=..\src\OpenWebDM\Resources\icon.ico
+; SetupIconFile disabled temporarily - icon file too large
+; SetupIconFile=..\src\OpenWebDM\Resources\icon.ico
 UninstallDisplayIcon={app}\OpenWebDM.exe
 UninstallDisplayName=OpenWeb Download Manager
 VersionInfoVersion=1.0.0.0

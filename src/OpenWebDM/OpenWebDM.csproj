@@ -4,7 +4,8 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net8.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
-    <ApplicationIcon>Resources\icon.ico</ApplicationIcon>
+    <!-- ApplicationIcon disabled temporarily due to icon format issues -->
+    <!-- <ApplicationIcon>Resources\icon.ico</ApplicationIcon> -->
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <SignAssembly>false</SignAssembly>
     <DelaySign>false</DelaySign>
