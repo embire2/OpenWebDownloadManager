@@ -1,6 +1,11 @@
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
+using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using Microsoft.Extensions.Logging;
 using OpenWebDM.Core.Models;
@@ -117,7 +122,7 @@ namespace OpenWebDM.ViewModels
             {
                 var downloadItem = await _downloadEngine.StartDownloadAsync(e.Url, _savePath);
                 
-                App.Current.Dispatcher.Invoke(() =>
+                Application.Current.Dispatcher.Invoke(() =>
                 {
                     Downloads.Insert(0, downloadItem);
                     UpdateStatus();
@@ -133,7 +138,7 @@ namespace OpenWebDM.ViewModels
 
         private void OnDownloadProgress(object? sender, DownloadProgressEventArgs e)
         {
-            App.Current.Dispatcher.Invoke(() =>
+            Application.Current.Dispatcher.Invoke(() =>
             {
                 UpdateStatus();
                 CalculateTotalSpeed();
@@ -142,7 +147,7 @@ namespace OpenWebDM.ViewModels
 
         private void OnDownloadCompleted(object? sender, DownloadCompletedEventArgs e)
         {
-            App.Current.Dispatcher.Invoke(() =>
+            Application.Current.Dispatcher.Invoke(() =>
             {
                 StatusText = $"Download completed: {Path.GetFileName(e.FilePath)}";
                 UpdateStatus();
@@ -151,7 +156,7 @@ namespace OpenWebDM.ViewModels
 
         private void OnDownloadError(object? sender, DownloadErrorEventArgs e)
         {
-            App.Current.Dispatcher.Invoke(() =>
+            Application.Current.Dispatcher.Invoke(() =>
             {
                 StatusText = $"Download error: {e.Message}";
                 UpdateStatus();
@@ -369,8 +374,8 @@ namespace OpenWebDM.ViewModels
 
         public event EventHandler? CanExecuteChanged
         {
-            add { CommandManager.RequerySuggested += value; }
-            remove { CommandManager.RequerySuggested -= value; }
+            add { System.Windows.Input.CommandManager.RequerySuggested += value; }
+            remove { System.Windows.Input.CommandManager.RequerySuggested -= value; }
         }
 
         public bool CanExecute(object? parameter) => _canExecute?.Invoke() ?? true;
@@ -400,8 +405,8 @@ namespace OpenWebDM.ViewModels
 
         public event EventHandler? CanExecuteChanged
         {
-            add { CommandManager.RequerySuggested += value; }
-            remove { CommandManager.RequerySuggested -= value; }
+            add { System.Windows.Input.CommandManager.RequerySuggested += value; }
+            remove { System.Windows.Input.CommandManager.RequerySuggested -= value; }
         }
 
         public bool CanExecute(object? parameter) => _canExecute?.Invoke((T?)parameter) ?? true;

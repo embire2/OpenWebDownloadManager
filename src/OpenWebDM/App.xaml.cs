@@ -1,3 +1,4 @@
+using System;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using OpenWebDM.Core.Services;
@@ -50,8 +51,6 @@ namespace OpenWebDM
 
             // ViewModels
             services.AddTransient<MainViewModel>();
-            services.AddTransient<DownloadListViewModel>();
-            services.AddTransient<SettingsViewModel>();
 
             // Views
             services.AddTransient<Views.MainWindow>();

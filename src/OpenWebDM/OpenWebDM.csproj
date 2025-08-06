@@ -30,6 +30,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\OpenWebDM.Core\OpenWebDM.Core.csproj" />
+    <ProjectReference Include="..\OpenWebDM.BrowserExtension\OpenWebDM.BrowserExtension.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,3 +1,6 @@
+using System;
+using System.Threading.Tasks;
+
 namespace OpenWebDM.Services
 {
     public interface IUpdateService
