@@ -1,0 +1,9 @@
+{
+  "name": "com.openwebdm.native",
+  "description": "OpenWeb Download Manager Native Messaging Host",
+  "path": "%APP_PATH%",
+  "type": "stdio",
+  "allowed_origins": [
+    "chrome-extension://openwebdm-extension-id/"
+  ]
+}
