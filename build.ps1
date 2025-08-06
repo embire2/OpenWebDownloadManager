@@ -65,14 +65,43 @@ try {
     if ($CreateInstaller) {
         Write-Host "Creating installer..." -ForegroundColor Yellow
         
-        $innoSetupPath = Get-Command "ISCC.exe" -ErrorAction SilentlyContinue
+        # Try to find Inno Setup in common installation paths
+        $innoSetupPaths = @(
+            "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe",
+            "${env:ProgramFiles}\Inno Setup 6\ISCC.exe",
+            "${env:ProgramFiles(x86)}\Inno Setup 5\ISCC.exe",
+            "${env:ProgramFiles}\Inno Setup 5\ISCC.exe"
+        )
+        
+        $innoSetupPath = $null
+        foreach ($path in $innoSetupPaths) {
+            if (Test-Path $path) {
+                $innoSetupPath = $path
+                break
+            }
+        }
+        
+        # Also check PATH
         if ($null -eq $innoSetupPath) {
-            Write-Warning "Inno Setup not found in PATH. Please install Inno Setup to create installer."
+            $innoSetupPath = Get-Command "ISCC.exe" -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Source
+        }
+        
+        if ($null -eq $innoSetupPath) {
+            Write-Warning "Inno Setup not found. Checked common installation paths:"
+            foreach ($path in $innoSetupPaths) {
+                Write-Host "  - $path" -ForegroundColor Gray
+            }
             Write-Host "Download from: https://jrsoftware.org/isdl.php" -ForegroundColor Cyan
+            Write-Host "Or add ISCC.exe to your PATH environment variable" -ForegroundColor Cyan
         } else {
-            & "ISCC.exe" ".\installer\setup.iss"
-            Write-Host "Installer created successfully!" -ForegroundColor Green
-            Write-Host "Installer file: .\installer\Output\OWDM1_0_0.exe" -ForegroundColor Cyan
+            Write-Host "Found Inno Setup: $innoSetupPath" -ForegroundColor Green
+            & "$innoSetupPath" ".\installer\setup.iss"
+            if ($LASTEXITCODE -eq 0) {
+                Write-Host "Installer created successfully!" -ForegroundColor Green
+                Write-Host "Installer file: .\installer\Output\OWDM1_0_0.exe" -ForegroundColor Cyan
+            } else {
+                Write-Error "Installer creation failed with exit code: $LASTEXITCODE"
+            }
         }
     }
 
